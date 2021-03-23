@@ -1,0 +1,4 @@
+#Tue Mar 23 15:23:26 ICT 2021
+base.0=/Users/vinhlt6/Documents/Project/Flutter/portfolio/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
