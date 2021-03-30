@@ -63,7 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    getHttp();
   }
 
   @override
@@ -111,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SelectableText(
                 'Response: $response',
               ),
-              CircularIndicatorWidget()
+              CircularIndicatorWidget(200,200)
             ],
           ),
         ),
@@ -122,16 +121,5 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  void getHttp() async {
-    try {
-      response = (await Dio().get("https://jsonplaceholder.typicode.com/posts")).toString();
-      print(response);
-      setState(() {
-      });
-    } catch (e) {
-      print(e);
-    }
   }
 }
