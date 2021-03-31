@@ -70,13 +70,32 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [SubheadWidget(text: "WTF",)],
+                children: [
+                  SubheadWidget(
+                    text: "WTF",
+                  )
+                ],
               ),
             ),
             Expanded(
               flex: 1,
               child: Column(
-                children: [Text('DSSSS')],
+                children: [
+                  Text(
+                    'WTF',
+                    style:
+                        TextStyle(fontFamily: 'RobotoSlab',
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    'WTF',
+                    style:
+                    TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
               ),
             )
           ],
@@ -94,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class SubheadWidget extends StatelessWidget {
   final String text;
 
-  const SubheadWidget({Key key, this.text=""}) : super(key: key);
+  const SubheadWidget({Key key, this.text = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +123,9 @@ class SubheadWidget extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
+              fontFamily: 'RobotoSlab',
               color: Theme.of(context).primaryColor,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.w500),
           textAlign: TextAlign.start,
         ),
         Container(
