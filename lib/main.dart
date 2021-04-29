@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/widgets/num_indicator_widget.dart';
+import 'package:portfolio/widgets/stepper_widget.dart';
+
+import 'page/home_page.dart';
+import 'widgets/bubble_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primaryColor: Colors.brown),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: ThemeData(primaryColor: Color(0xff343434)),
+      home: HomePage(),
     );
   }
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -83,17 +90,51 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     'WTF',
-                    style:
-                        TextStyle(fontFamily: 'RobotoSlab',
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontFamily: 'RobotoSlab',
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500),
                   ),
                   Text(
                     'WTF',
-                    style:
-                    TextStyle(
+                    style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.w500),
+                  ),
+                  StepperWidget(
+                    indicatorSize: 28,
+                    indicatorPaddingTop: 0,
+                    gutterSpacing: 10,
+                    lineGap: 0,
+                    indicators: [
+                      NumIndicatorWidget(size: 28, num: '2'),
+                      NumIndicatorWidget(size: 28, num: '2'),
+                      NumIndicatorWidget(size: 28, num: '2')
+                    ],
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: BubbleWidget(
+                            popupDirection: TooltipDirection.left,
+                            arrowBaseWidth: 1,
+                            arrowLength: 1,
+                            arrowTipDistance: 1,
+                            arrowTipRadius: 1,
+                            borderRadius: 5,
+                            borderColor: Colors.grey,
+                            borderWidth: 1,
+                            child: Container(
+                              height: 40,
+                              color: Colors.green,
+                            )),
+                      ),
+                      Container(
+                        height: 50,
+                      ),
+                      Container(
+                        height: 50,
+                      )
+                    ],
                   )
                 ],
               ),
