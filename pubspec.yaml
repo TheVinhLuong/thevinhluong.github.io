@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^3.0.10
+  printing: ^5.0.4
+  url_launcher: ^6.0.3
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -39,6 +42,23 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/images/
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/OpenSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+    - family: Play
+      fonts:
+        - asset: assets/fonts/Play-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Play-Bold.ttf
+          weight: 700
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

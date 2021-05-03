@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/widgets/circular_indicator_widget.dart';
-import 'package:dio/dio.dart';
+import 'package:portfolio/page/aboutMe/about_me_page.dart';
+import 'package:portfolio/widgets/image_indicator_widget.dart';
+import 'package:portfolio/widgets/stepper_widget.dart';
+
+import 'page/home_page.dart';
+import 'widgets/bubble_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,18 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: ThemeData(primaryColor: Color(0xff343434)),
+      home: AboutMePage(),
     );
   }
 }
@@ -60,10 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+
   @override
   void initState() {
     super.initState();
-    getHttp();
   }
 
   @override
@@ -75,45 +69,85 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: SelectableText(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: SingleChildScrollView(
-          child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SelectableText(
-                'You have pushed the button this many timesss:',
+      body: SingleChildScrollView(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SubheadWidget(
+                    text: "WTF",
+                  )
+                ],
               ),
-              SelectableText(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
+            ),
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  Text(
+                    'WTF',
+                    style: TextStyle(
+                        fontFamily: 'RobotoSlab',
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    'WTF',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  StepperWidget(
+                    indicatorSize: 28,
+                    indicatorPaddingTop: 0,
+                    gutterSpacing: 10,
+                    lineGap: 0,
+                    indicators: [
+                      ImageIndicatorWidget(
+                        size: 28,
+                        imageSrc: "suitcase-with-white-details.png",
+                      ),
+                      ImageIndicatorWidget(
+                        size: 28,
+                        imageSrc: "suitcase-with-white-details.png",
+                      ),
+                      ImageIndicatorWidget(
+                        size: 28,
+                        imageSrc: "suitcase-with-white-details.png",
+                      ),
+                    ],
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: BubbleWidget(
+                            popupDirection: TooltipDirection.left,
+                            arrowBaseWidth: 1,
+                            arrowLength: 1,
+                            arrowTipDistance: 1,
+                            arrowTipRadius: 1,
+                            borderRadius: 5,
+                            borderColor: Colors.grey,
+                            borderWidth: 1,
+                            child: Container(
+                              height: 40,
+                              color: Colors.green,
+                            )),
+                      ),
+                      Container(
+                        height: 50,
+                      ),
+                      Container(
+                        height: 50,
+                      )
+                    ],
+                  )
+                ],
               ),
-              SelectableText(
-                'Response: $response',
-              ),
-              CircularIndicatorWidget()
-            ],
-          ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -123,15 +157,31 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
 
-  void getHttp() async {
-    try {
-      response = (await Dio().get("https://jsonplaceholder.typicode.com/posts")).toString();
-      print(response);
-      setState(() {
-      });
-    } catch (e) {
-      print(e);
-    }
+class SubheadWidget extends StatelessWidget {
+  final String text;
+
+  const SubheadWidget({Key key, this.text = ""}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+              fontFamily: 'RobotoSlab',
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.w500),
+          textAlign: TextAlign.start,
+        ),
+        Container(
+            color: Theme.of(context).primaryColor,
+            width: double.infinity,
+            height: 3),
+      ],
+    );
   }
 }
