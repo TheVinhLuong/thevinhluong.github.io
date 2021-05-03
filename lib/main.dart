@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/widgets/num_indicator_widget.dart';
+import 'package:portfolio/page/aboutMe/about_me_page.dart';
+import 'package:portfolio/widgets/image_indicator_widget.dart';
 import 'package:portfolio/widgets/stepper_widget.dart';
 
 import 'page/home_page.dart';
@@ -16,12 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primaryColor: Color(0xff343434)),
-      home: HomePage(),
+      home: AboutMePage(),
     );
   }
 }
-
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -107,9 +106,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     gutterSpacing: 10,
                     lineGap: 0,
                     indicators: [
-                      NumIndicatorWidget(size: 28, num: '2'),
-                      NumIndicatorWidget(size: 28, num: '2'),
-                      NumIndicatorWidget(size: 28, num: '2')
+                      ImageIndicatorWidget(
+                        size: 28,
+                        imageSrc: "suitcase-with-white-details.png",
+                      ),
+                      ImageIndicatorWidget(
+                        size: 28,
+                        imageSrc: "suitcase-with-white-details.png",
+                      ),
+                      ImageIndicatorWidget(
+                        size: 28,
+                        imageSrc: "suitcase-with-white-details.png",
+                      ),
                     ],
                     children: [
                       Padding(

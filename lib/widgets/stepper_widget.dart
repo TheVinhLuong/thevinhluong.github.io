@@ -66,6 +66,7 @@ class StepperWidget extends StatelessWidget {
 
           final timelineTile = <Widget>[
             Material(
+              color: Colors.white,
               child: CustomPaint(
                 foregroundPainter: _TimelinePainter(
                   hideDefaultIndicator: indicator != null,
@@ -90,7 +91,7 @@ class StepperWidget extends StatelessWidget {
               ),
             ),
             SizedBox(width: gutterSpacing),
-            Expanded(child: Material(child: child)),
+            Expanded(child: Material(child: child, color: Colors.white,)),
           ];
 
           return IntrinsicHeight(

@@ -9,6 +9,7 @@ class BubbleWidget extends StatelessWidget {
   final double arrowLength;
   final double arrowTipRadius;
   final double arrowTipDistance;
+  final double arrowTipVerticalDistanceFromTop;
   final double borderRadius;
   final Color borderColor;
   final double borderWidth;
@@ -23,6 +24,7 @@ class BubbleWidget extends StatelessWidget {
       this.borderRadius,
       this.borderColor,
       this.borderWidth,
+      this.arrowTipVerticalDistanceFromTop,
       this.child});
 
   @override
@@ -37,7 +39,9 @@ class BubbleWidget extends StatelessWidget {
               arrowTipRadius: arrowTipRadius,
               borderRadius: borderRadius,
               borderColor: borderColor,
-              borderWidth: borderWidth)),
+              borderWidth: borderWidth,
+              arrowTipVerticalDistanceFromTop:
+                  arrowTipVerticalDistanceFromTop)),
       child: child,
     );
   }
@@ -52,8 +56,7 @@ class _BubbleShape extends ShapeBorder {
   final Color borderColor;
   final double borderWidth;
   final TooltipDirection popupDirection;
-  final double tipWidth = 8;
-  final double tipHeight = 10;
+  final double arrowTipVerticalDistanceFromTop;
 
   _BubbleShape(
       {this.popupDirection,
@@ -63,11 +66,12 @@ class _BubbleShape extends ShapeBorder {
       this.borderColor,
       this.arrowLength,
       this.arrowTipRadius,
-      this.borderWidth});
+      this.borderWidth,
+      this.arrowTipVerticalDistanceFromTop});
 
   @override
   EdgeInsetsGeometry get dimensions => EdgeInsets.fromLTRB(
-      borderWidth + borderRadius / 2 + tipHeight,
+      borderWidth + borderRadius / 2 + arrowTipDistance,
       borderWidth + borderRadius / 2,
       borderWidth + borderRadius / 2,
       borderWidth + borderRadius / 2);
@@ -78,12 +82,12 @@ class _BubbleShape extends ShapeBorder {
   @override
   Path getOuterPath(Rect rect, {TextDirection textDirection}) {
     Path _getLeftTopPath(Rect rect) => Path()
-      ..moveTo(rect.left + borderWidth / 2 + tipHeight,
-          rect.bottom - rect.height / 2 - tipWidth / 2 - 1)
-      ..lineTo(rect.left + borderWidth / 2 + tipHeight,
+      ..moveTo(rect.left + borderWidth / 2 + arrowTipDistance,
+          rect.bottom - (rect.height - arrowTipVerticalDistanceFromTop) - arrowBaseWidth / 2 - 1)
+      ..lineTo(rect.left + borderWidth / 2 + arrowTipDistance,
           rect.top + borderWidth + borderRadius)
       ..arcToPoint(
-          Offset(rect.left + borderWidth + borderRadius + tipHeight,
+          Offset(rect.left + borderWidth + borderRadius + arrowTipDistance,
               rect.top + borderWidth / 2),
           radius: Radius.circular(borderRadius + borderWidth))
       ..lineTo(
@@ -99,27 +103,23 @@ class _BubbleShape extends ShapeBorder {
           Offset(rect.right - borderWidth - borderRadius,
               rect.bottom - borderWidth / 2),
           radius: Radius.circular(borderRadius + borderWidth))
-      ..lineTo(rect.left + borderWidth + borderRadius + tipHeight,
+      ..lineTo(rect.left + borderWidth + borderRadius + arrowTipDistance,
           rect.bottom - borderWidth / 2)
       ..arcToPoint(
-          Offset(rect.left + borderWidth / 2 + tipHeight,
+          Offset(rect.left + borderWidth / 2 + arrowTipDistance,
               rect.bottom - borderWidth - borderRadius),
           radius: Radius.circular(borderRadius + borderWidth))
-      ..lineTo(rect.left + borderWidth / 2 + tipHeight,
-          rect.bottom - rect.height / 2 + tipWidth / 2)
-      ..lineTo(rect.left + borderWidth / 2, rect.bottom - rect.height / 2)
+      ..lineTo(rect.left + borderWidth / 2 + arrowTipDistance,
+          rect.bottom - (rect.height - arrowTipVerticalDistanceFromTop) + arrowBaseWidth / 2)
+      ..lineTo(rect.left + borderWidth / 2,
+          rect.bottom - (rect.height - arrowTipVerticalDistanceFromTop))
       ..quadraticBezierTo(
           rect.left + borderWidth / 2,
-          rect.bottom - rect.height / 2,
-          rect.left + borderWidth / 2 + tipHeight,
-          rect.bottom - rect.height / 2 - tipWidth / 2)
-      ..lineTo(rect.left + borderWidth / 2 + tipHeight,
-          rect.bottom - rect.height / 2 - tipWidth / 2 - 1);
-    // ..lineTo(rect.left + borderWidth / 2 + tipHeight+borderWidth/2, rect.bottom - rect.height/2 - tipWidth/2);
-    // ..relativeLineTo(
-    //     0, -(rect.height / 2 - borderWidth - borderRadius - tipWidth / 2))
-    // ..relativeLineTo(-tipHeight, -tipWidth / 2)
-    // ..relativeLineTo(tipHeight, -tipWidth / 2);
+          rect.bottom - (rect.height - arrowTipVerticalDistanceFromTop),
+          rect.left + borderWidth / 2 + arrowTipDistance,
+          rect.bottom - (rect.height - arrowTipVerticalDistanceFromTop) - arrowBaseWidth / 2)
+      ..lineTo(rect.left + borderWidth / 2 + arrowTipDistance,
+          rect.bottom - (rect.height - arrowTipVerticalDistanceFromTop) - arrowBaseWidth / 2 - 1);
 
     Path _getBottomRightPath(Rect rect) => Path()
       ..moveTo(rect.left + borderRadius, rect.bottom)
@@ -133,66 +133,8 @@ class _BubbleShape extends ShapeBorder {
     switch (popupDirection) {
       case TooltipDirection.left:
         return _getLeftTopPath(rect);
-      // ..lineTo(rect.right-borderRadius/2, rect.bottom - borderRadius/2);
-      // ..arcToPoint(Offset(rect.right - borderRadius/2, rect.bottom - borderRadius/2),
-      //     radius: Radius.circular(borderRadius))
-      // ..lineTo(rect.left + borderRadius/2, rect.bottom-borderRadius/2)
-      // ..arcToPoint(Offset(rect.left + borderRadius/2, rect.bottom - borderRadius),
-      //     radius: Radius.circular(borderRadius));
-      // ..arcToPoint(Offset(borderRadius, rect.bottom - borderRadius));
-      //   ..quadraticBezierTo(
-      //       targetCenter.dx - arrowTipDistance,
-      //       targetCenter.dy,
-      //       targetCenter.dx -
-      //           arrowTipDistance -
-      //           arrowTipRadius / (arrowBaseWidth / 2) * arrowLength,
-      //       targetCenter.dy +
-      //           (arrowBaseWidth / 2 - (arrowBaseWidth / 2 - arrowTipRadius)))
-      //   //  left /
-      //   ..lineTo(
-      //       rect.right,
-      //       min(targetCenter.dy + arrowBaseWidth / 2,
-      //           rect.bottom - borderRadius))
-      //   ..lineTo(rect.right, rect.bottom - borderRadius)
-      //   ..arcToPoint(Offset(rect.right - borderRadius, rect.bottom),
-      //       radius: Radius.circular(borderRadius), clockwise: true)
-      //   ..lineTo(rect.left + borderRadius, rect.bottom)
-      //   ..arcToPoint(Offset(rect.left, rect.bottom - borderRadius),
-      //       radius: Radius.circular(borderRadius), clockwise: true);
       case TooltipDirection.right:
         return _getBottomRightPath(rect);
-      //   ..lineTo(rect.left + borderRadius, rect.top)
-      //   ..arcToPoint(Offset(rect.left, rect.top + borderRadius),
-      //       radius: Radius.circular(borderRadius), clockwise: false)
-      //   ..lineTo(
-      //       rect.left,
-      //       max(
-      //           min(targetCenter.dy - arrowBaseWidth / 2,
-      //               rect.bottom - borderRadius - arrowBaseWidth),
-      //           rect.top + borderRadius))
-      //   //left to arrow tip   /
-      //   ..lineTo(
-      //       targetCenter.dx +
-      //           arrowTipDistance +
-      //           arrowTipRadius / (arrowBaseWidth / 2) * arrowLength,
-      //       targetCenter.dy -
-      //           (arrowBaseWidth / 2 - (arrowBaseWidth / 2 - arrowTipRadius)))
-      //   ..quadraticBezierTo(
-      //       targetCenter.dx + arrowTipDistance,
-      //       targetCenter.dy,
-      //       targetCenter.dx +
-      //           arrowTipDistance +
-      //           arrowTipRadius / (arrowBaseWidth / 2) * arrowLength,
-      //       targetCenter.dy +
-      //           (arrowBaseWidth / 2 - (arrowBaseWidth / 2 - arrowTipRadius)))
-      //   //  right
-      //   ..lineTo(
-      //       rect.left,
-      //       min(targetCenter.dy + arrowBaseWidth / 2,
-      //           rect.bottom - borderRadius))
-      //   ..lineTo(rect.left, rect.bottom - borderRadius)
-      //   ..arcToPoint(Offset(rect.left + borderRadius, rect.bottom),
-      //       radius: Radius.circular(borderRadius), clockwise: false);
 
       default:
         throw AssertionError(popupDirection);
@@ -208,33 +150,6 @@ class _BubbleShape extends ShapeBorder {
       ..strokeJoin = StrokeJoin.miter;
 
     canvas.drawPath(getOuterPath(rect), paint);
-
-    // canvas.drawPath(getOuterPath(rect), paint);
-    // paint = Paint()
-    //   ..color = Colors.blue
-    //   ..style = PaintingStyle.stroke
-    //   ..strokeWidth = borderWidth;
-    //
-    // canvas.drawPath(
-    //     Path()
-    //       ..moveTo(rect.right, rect.top)
-    //       ..lineTo(rect.right, rect.bottom),
-    //     paint);
-    // canvas.drawPath(
-    //     Path()
-    //       ..moveTo(rect.left, rect.top)
-    //       ..lineTo(rect.left, rect.bottom),
-    //     paint);
-    // canvas.drawPath(
-    //     Path()
-    //       ..moveTo(rect.right, rect.top)
-    //       ..lineTo(rect.left, rect.top),
-    //     paint);
-    // canvas.drawPath(
-    //     Path()
-    //       ..moveTo(rect.right, rect.bottom)
-    //       ..lineTo(rect.left, rect.bottom),
-    //     paint);
   }
 
   @override
