@@ -6,11 +6,8 @@ class ImageIndicatorWidget extends StatelessWidget {
   final String imageSrc;
   final double imagePadding;
 
-  const ImageIndicatorWidget({
-    this.size,
-    this.imageSrc,
-    this.imagePadding = 0
-  }) : super();
+  const ImageIndicatorWidget({this.size, this.imageSrc, this.imagePadding = 0})
+      : super();
 
   @override
   Widget build(BuildContext context) => Container(
@@ -19,5 +16,5 @@ class ImageIndicatorWidget extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.black, shape: BoxShape.circle),
       width: size,
       height: size,
-      child: Image.asset(imageSrc));
+      child: Image(image: AssetImage(imageSrc)));
 }
