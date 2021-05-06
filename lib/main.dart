@@ -108,15 +108,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     indicators: [
                       ImageIndicatorWidget(
                         size: 28,
-                        imageSrc: "suitcase-with-white-details.png",
+                        imageSrc: "assets/suitcase-with-white-details.png",
                       ),
                       ImageIndicatorWidget(
                         size: 28,
-                        imageSrc: "suitcase-with-white-details.png",
+                        imageSrc: "assets/suitcase-with-white-details.png",
                       ),
                       ImageIndicatorWidget(
                         size: 28,
-                        imageSrc: "suitcase-with-white-details.png",
+                        imageSrc: "assets/suitcase-with-white-details.png",
                       ),
                     ],
                     children: [

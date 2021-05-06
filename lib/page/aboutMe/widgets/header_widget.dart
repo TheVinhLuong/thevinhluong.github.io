@@ -219,7 +219,7 @@ class HeaderWidget extends StatelessWidget {
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 5)),
                     child: Image.asset(
-                      "images/printing.png",
+                      "assets/images/printing.png",
                     ),
                   ),
                   onTap: () {

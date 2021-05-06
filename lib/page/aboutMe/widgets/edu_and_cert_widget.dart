@@ -24,12 +24,12 @@ class EduAndCertWidget extends StatelessWidget {
       indicators: [
         ImageIndicatorWidget(
           size: indicatorSize,
-          imageSrc: "images/graduate-cap.png",
+          imageSrc: "assets/images/graduate-cap.png",
           imagePadding: 10,
         ),
         ImageIndicatorWidget(
           size: indicatorSize,
-          imageSrc: "images/graduate-cap.png",
+          imageSrc: "assets/images/graduate-cap.png",
           imagePadding: 10,
         ),
       ],

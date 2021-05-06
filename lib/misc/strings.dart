@@ -20,10 +20,11 @@ const String about_me_description = "I am a mobile software engineer who loves "
     "to build magical apps with beautiful UI, regardless of the platform it is "
     "running on; hence I am falling in love with Flutter and want to sharpen my skills in it.";
 const String about_me_employment_oneid = '''
-  - Developing E-Wallet for VinShop app as technical leader.
-  - Developing Flutter Plugin for payment solutions which combines existing native mobile SDK; awarded with Star Engineer prize for this.
-  - Developing and maintaining VinShop's design system.
-  - VinShop's CI/CD maintainer. 
+  - Develop E-Wallet for VinShop app as technical leader.
+  - Develop Flutter Plugin for payment solutions which combines existing native mobile SDK; awarded with Star Engineer prize for this.
+  - Develop and maintain VinShop's design system.
+  - Creator and maintainer of Flutter crowdin fetcher tool.
+  - VinShop's CI/CD maintainer.
 ''';
 const String about_me_employment_sun_asterisk = '''
   - Developing KidsTaxi & KidsDriver apps: a cab-calling app.

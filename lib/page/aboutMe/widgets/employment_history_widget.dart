@@ -25,12 +25,12 @@ class EmploymentHistoryWidget extends StatelessWidget {
       indicators: [
         ImageIndicatorWidget(
           size: indicatorSize,
-          imageSrc: "images/suitcase-with-white-details.png",
+          imageSrc: "assets/images/suitcase-with-white-details.png",
           imagePadding: 10,
         ),
         ImageIndicatorWidget(
           size: indicatorSize,
-          imageSrc: "images/suitcase-with-white-details.png",
+          imageSrc: "assets/images/suitcase-with-white-details.png",
           imagePadding: 10,
         ),
       ],
